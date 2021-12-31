@@ -1,4 +1,4 @@
-# Courses related to devops role
+# Courses of the devops role
 
 ```bash
     # vagrant
