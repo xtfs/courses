@@ -1,0 +1,6 @@
+---
+- name: 'instalar dependencias base' 
+  apt:
+    name:  ['php7.4', 'apache2', 'libapache2-mod-php7.4', 'php7.4-gd', 'php-ssh2', 'libmcrypt-dev', 'php7.4-mysql']
+    state: latest
+  become: yes

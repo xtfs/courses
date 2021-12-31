@@ -1,0 +1,6 @@
+---
+db_username: wordpress_user
+db_userpass: '12345' 
+db_name: wordpress_db
+
+wp_base_dir: '/var/www/wordpress'

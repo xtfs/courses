@@ -1,0 +1,33 @@
+---
+- name: 'install mysql' 
+  apt:
+    name:  ['mysql-server-8.0', 'python3-mysqldb']
+    state: latest
+  become: yes
+
+- name: 'Cria o banco do MySQL'
+  mysql_db:
+    name: "{{db_name}}"
+    login_user: root
+    state: present
+  become: yes
+
+- name: 'Cria o usuário do MySQL'
+  mysql_user:
+    login_user: root
+    name: "{{db_username}}"
+    password: "{{db_userpass}}"
+    priv: "{{db_name}}.*:ALL"
+    state: present
+    host: "{{ item }}"
+  become: yes
+  with_items:
+  - "{{wp_host_ip}}"
+
+- name: 'Configurar my.cnf para acesso remoto'
+  copy:
+    src:  'files/my.cnf'
+    dest:  '/etc/mysql/mysql.conf.d/mysqld.cnf'
+  become: yes
+  notify:
+  - restart mysql
